@@ -401,13 +401,7 @@ mysqli_data_seek($data, 0);
 
     </div>
 
-    <div class="notice">
-        Karyawan tidak dapat menambah atau mengubah data Issue Target.
-        Jika Working Record berstatus <strong>Done</strong>,
-        aktivitas baru tidak dapat ditambahkan. Aktivitas yang sudah ada
-        tetap dapat dibuka untuk diedit sesuai aturan pada halaman Working Record.
-    </div>
-
+   
     <section class="table-card">
 
         <div class="table-heading">

@@ -1,4 +1,4 @@
-```php
+
 <?php
 session_start();
 
@@ -567,4 +567,3 @@ toggleButton.addEventListener('click', function () {
 
 </body>
 </html>
-```
