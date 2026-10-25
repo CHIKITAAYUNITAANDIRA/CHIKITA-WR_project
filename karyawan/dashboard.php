@@ -1,4 +1,4 @@
-```php
+
 <?php
 require '../session_check.php';
 require '../config/database.php';
@@ -390,4 +390,3 @@ if (!$queryIssue) {
 
 </body>
 </html>
-```
