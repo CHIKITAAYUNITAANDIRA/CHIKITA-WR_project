@@ -1,4 +1,4 @@
-```php
+
 <?php
 require '../session_check.php';
 require '../config/database.php';
@@ -407,7 +407,7 @@ function e($value) {
                         id="nik"
                         name="nik"
                         maxlength="20"
-                        placeholder="Contoh: 178 atau ADMIN001"
+                        placeholder="..."
                         value="<?= e($_POST['nik'] ?? '') ?>"
                         autocomplete="off"
                         required
@@ -480,11 +480,10 @@ function e($value) {
     </main>
 
     <footer class="footer">
-        &copy; <?= date('Y') ?> Working Record Operator PT EX
+        &copy; <?= date('Y') ?>Copyright ©️ 2026 Debby Fransurya, S.Kom.
     </footer>
 
 </div>
 
 </body>
 </html>
-```

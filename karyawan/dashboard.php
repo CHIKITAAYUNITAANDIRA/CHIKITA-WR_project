@@ -1,4 +1,3 @@
-
 <?php
 require '../session_check.php';
 require '../config/database.php';

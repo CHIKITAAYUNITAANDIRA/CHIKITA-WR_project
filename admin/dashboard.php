@@ -1,4 +1,4 @@
-```php
+
 <?php
 
 require '../session_check.php';
@@ -19,391 +19,441 @@ $nama = htmlspecialchars(
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard Admin - Working Record PT EX</title>
+<title>Dashboard Admin - Working Record PT EX</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #eef6ff;
-            color: #263449;
-            min-height: 100vh;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #263449;
 
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            height: 100vh;
-            padding: 28px 18px;
-            background: linear-gradient(180deg, #dceeff, #c5e2ff);
-            border-right: 1px solid #b8d8f5;
-        }
+    /* Wallpaper gambar */
+    background:
+        linear-gradient(
+            120deg,
+            rgba(224, 240, 255, 0.88),
+            rgba(255, 238, 240, 0.82)
+        ),
+        url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=85');
 
-        .brand {
-            padding: 10px 8px 28px;
-            border-bottom: 2px solid #ffffff;
-        }
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
-        .brand-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #e53945;
-            color: white;
-            border-radius: 14px;
-            font-size: 23px;
-            font-weight: bold;
-            margin-bottom: 14px;
-        }
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    padding: 28px 18px;
 
-        .brand h2 {
-            font-size: 19px;
-            color: #173c68;
-            line-height: 1.4;
-        }
+    background: rgba(220, 238, 255, 0.92);
+    backdrop-filter: blur(15px);
 
-        .brand p {
-            font-size: 12px;
-            color: #56718f;
-            margin-top: 5px;
-        }
+    border-right: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 5px 0 25px rgba(30,70,110,0.08);
+    z-index: 10;
+}
 
-        .menu-title {
-            margin: 28px 10px 12px;
-            color: #6b829c;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
+.brand {
+    padding: 10px 8px 28px;
+    border-bottom: 2px solid white;
+}
 
-        .menu a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 13px;
-            margin-bottom: 8px;
-            color: #294a70;
-            text-decoration: none;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
+.brand-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        .menu a:hover,
-        .menu a.active {
-            background: #ffffff;
-            color: #d92f3c;
-            box-shadow: 0 4px 12px rgba(43, 91, 140, 0.08);
-        }
+    background: linear-gradient(135deg, #e53945, #ff7882);
+    color: white;
+    border-radius: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 14px;
+    box-shadow: 0 5px 15px rgba(229,57,69,0.25);
+}
 
-        .menu-icon {
-            width: 24px;
-            text-align: center;
-            font-size: 18px;
-        }
+.brand h2 {
+    font-size: 19px;
+    color: #173c68;
+    line-height: 1.4;
+}
 
-        .sidebar-bottom {
-            position: absolute;
-            bottom: 25px;
-            left: 18px;
-            right: 18px;
-        }
+.brand p {
+    font-size: 12px;
+    color: #56718f;
+    margin-top: 5px;
+}
 
-        .logout {
-            display: block;
-            text-align: center;
-            padding: 13px;
-            color: #d92f3c;
-            background: #fff0f1;
-            border: 1px solid #ffd1d5;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: 0.2s;
-        }
+.menu-title {
+    margin: 28px 10px 12px;
+    color: #6b829c;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
 
-        .logout:hover {
-            background: #e53945;
-            color: white;
-        }
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 13px;
+    margin-bottom: 8px;
 
-        /* Konten utama */
-        .main {
-            margin-left: 250px;
-            padding: 30px 35px;
-        }
+    color: #294a70;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.25s;
+}
 
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+.menu a:hover,
+.menu a.active {
+    background: white;
+    color: #d92f3c;
+    transform: translateX(4px);
+    box-shadow: 0 5px 15px rgba(43,91,140,0.10);
+}
 
-        .topbar h1 {
-            font-size: 26px;
-            color: #173c68;
-        }
+.menu-icon {
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+}
 
-        .topbar p {
-            margin-top: 7px;
-            color: #7a8ba1;
-            font-size: 14px;
-        }
+.sidebar-bottom {
+    position: absolute;
+    bottom: 25px;
+    left: 18px;
+    right: 18px;
+}
 
-        .admin-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 15px;
-            background: white;
-            border: 1px solid #e0eaf5;
-            border-radius: 12px;
-        }
+.logout {
+    display: block;
+    text-align: center;
+    padding: 13px;
 
-        .avatar {
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: #ffe1e4;
-            color: #d92f3c;
-            font-weight: bold;
-        }
+    color: #d92f3c;
+    background: #fff0f1;
+    border: 1px solid #ffd1d5;
+    border-radius: 11px;
 
-        .admin-name {
-            font-size: 13px;
-            font-weight: bold;
-            color: #29415e;
-        }
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.25s;
+}
 
-        .admin-role {
-            margin-top: 4px;
-            font-size: 11px;
-            color: #8493a6;
-        }
+.logout:hover {
+    background: #e53945;
+    color: white;
+}
 
-        /* Banner sambutan */
-        .welcome {
-            position: relative;
-            overflow: hidden;
-            padding: 30px;
-            margin-bottom: 28px;
-            border-radius: 18px;
-            color: white;
-            background: linear-gradient(115deg, #e53945, #f05b68);
-            box-shadow: 0 8px 22px rgba(229, 57, 69, 0.16);
-        }
+/* KONTEN */
+.main {
+    margin-left: 250px;
+    padding: 30px 35px;
+}
 
-        .welcome::after {
-            content: "";
-            position: absolute;
-            width: 190px;
-            height: 190px;
-            border: 35px solid rgba(255, 255, 255, 0.10);
-            border-radius: 50%;
-            right: -35px;
-            top: -75px;
-        }
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
 
-        .welcome h2 {
-            position: relative;
-            z-index: 1;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
+.topbar h1 {
+    font-size: 27px;
+    color: #173c68;
+}
 
-        .welcome p {
-            position: relative;
-            z-index: 1;
-            font-size: 14px;
-            line-height: 1.7;
-            color: #fff0f1;
-            max-width: 550px;
-        }
+.topbar p {
+    margin-top: 7px;
+    color: #60758e;
+    font-size: 14px;
+}
 
-        .welcome-label {
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-            margin-bottom: 13px;
-            padding: 6px 10px;
-            background: rgba(255, 255, 255, 0.18);
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+.admin-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
 
-        /* Kartu menu */
-        .section-heading {
-            margin-bottom: 16px;
-        }
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(10px);
+    border: 1px solid white;
+    border-radius: 13px;
+    box-shadow: 0 5px 18px rgba(30,70,110,0.07);
+}
 
-        .section-heading h2 {
-            font-size: 19px;
-            color: #173c68;
-        }
+.avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 
-        .section-heading p {
-            margin-top: 6px;
-            color: #8290a2;
-            font-size: 13px;
-        }
+    background: #ffe1e4;
+    color: #d92f3c;
+    font-weight: bold;
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 20px;
-        }
+.admin-name {
+    font-size: 13px;
+    font-weight: bold;
+    color: #29415e;
+}
 
-        .card {
-            display: flex;
-            flex-direction: column;
-            min-height: 225px;
-            padding: 23px;
-            background: #ffffff;
-            border: 1px solid #e0eaf5;
-            border-radius: 15px;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: 0 4px 15px rgba(36, 73, 115, 0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+.admin-role {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #8493a6;
+}
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 24px rgba(36, 73, 115, 0.10);
-        }
+/* BANNER */
+.welcome {
+    position: relative;
+    overflow: hidden;
+    padding: 35px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    color: white;
 
-        .card-icon {
-            width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 14px;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+    background:
+        linear-gradient(
+            110deg,
+            rgba(194, 35, 52, 0.94),
+            rgba(229, 57, 69, 0.82)
+        ),
+        url('https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=1200&q=80');
 
-        .icon-red {
-            color: #d92f3c;
-            background: #fff0f1;
-        }
+    background-size: cover;
+    background-position: center;
 
-        .icon-blue {
-            color: #2675bb;
-            background: #e5f3ff;
-        }
+    box-shadow: 0 10px 28px rgba(229,57,69,0.20);
+}
 
-        .card h3 {
-            margin-bottom: 9px;
-            font-size: 17px;
-            color: #243d5b;
-        }
+.welcome::after {
+    content: "";
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    border: 35px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    right: -35px;
+    top: -80px;
+}
 
-        .card p {
-            color: #8492a5;
-            font-size: 13px;
-            line-height: 1.7;
-            margin-bottom: 18px;
-        }
+.welcome h2 {
+    position: relative;
+    z-index: 1;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
 
-        .card-action {
-            margin-top: auto;
-            color: #d92f3c;
-            font-size: 13px;
-            font-weight: bold;
-        }
+.welcome p {
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #fff0f1;
+    max-width: 570px;
+}
 
-        .card:nth-child(2) .card-action {
-            color: #2675bb;
-        }
+.welcome-label {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 15px;
+    padding: 7px 12px;
 
-        .footer {
-            margin-top: 35px;
-            padding-top: 20px;
-            border-top: 1px solid #dce7f3;
-            color: #94a0af;
-            font-size: 12px;
-            text-align: center;
-        }
+    background: rgba(255,255,255,0.20);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 
-        /* Tampilan tablet dan HP */
-        @media (max-width: 1050px) {
-            .cards {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
+/* JUDUL MENU */
+.section-heading {
+    margin-bottom: 17px;
+}
 
-        @media (max-width: 700px) {
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                padding: 18px;
-            }
+.section-heading h2 {
+    font-size: 20px;
+    color: #173c68;
+}
 
-            .brand {
-                padding-bottom: 15px;
-            }
+.section-heading p {
+    margin-top: 6px;
+    color: #60758e;
+    font-size: 13px;
+}
 
-            .menu-title {
-                margin-top: 18px;
-            }
+/* KARTU */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
 
-            .sidebar-bottom {
-                position: static;
-                margin-top: 18px;
-            }
+.card {
+    display: flex;
+    flex-direction: column;
+    min-height: 230px;
+    padding: 25px;
 
-            .main {
-                margin-left: 0;
-                padding: 22px 16px;
-            }
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(12px);
 
-            .topbar {
-                align-items: flex-start;
-                flex-direction: column;
-            }
+    border: 1px solid rgba(255,255,255,0.95);
+    border-radius: 18px;
+    text-decoration: none;
+    color: inherit;
 
-            .topbar h1 {
-                font-size: 23px;
-            }
+    box-shadow: 0 7px 22px rgba(36,73,115,0.08);
+    transition: 0.25s;
+}
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
+.card:hover {
+    transform: translateY(-6px);
+    background: white;
+    box-shadow: 0 13px 28px rgba(36,73,115,0.15);
+}
 
-            .welcome {
-                padding: 24px;
-            }
+.card-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
 
-            .welcome h2 {
-                font-size: 21px;
-            }
-        }
-    </style>
+.icon-red {
+    color: #d92f3c;
+    background: #fff0f1;
+}
+
+.icon-blue {
+    color: #2675bb;
+    background: #e5f3ff;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #243d5b;
+}
+
+.card p {
+    color: #71839a;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 18px;
+}
+
+.card-action {
+    margin-top: auto;
+    color: #d92f3c;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.card:nth-child(2) .card-action {
+    color: #2675bb;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 38px;
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.8);
+    color: #63758b;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1050px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 18px;
+    }
+
+    .brand {
+        padding-bottom: 15px;
+    }
+
+    .menu-title {
+        margin-top: 18px;
+    }
+
+    .sidebar-bottom {
+        position: static;
+        margin-top: 18px;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 22px 16px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .topbar h1 {
+        font-size: 23px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome {
+        padding: 25px;
+    }
+
+    .welcome h2 {
+        font-size: 21px;
+    }
+
+    body {
+        background-attachment: scroll;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -419,6 +469,7 @@ $nama = htmlspecialchars(
     <div class="menu-title">Menu Utama</div>
 
     <nav class="menu">
+
         <a href="dashboard.php" class="active">
             <span class="menu-icon">&#8962;</span>
             Dashboard
@@ -433,6 +484,7 @@ $nama = htmlspecialchars(
             <span class="menu-icon">&#9776;</span>
             Issue Target
         </a>
+
     </nav>
 
     <div class="sidebar-bottom">
@@ -450,6 +502,7 @@ $nama = htmlspecialchars(
 <main class="main">
 
     <div class="topbar">
+
         <div>
             <h1>Dashboard Admin</h1>
             <p>Kelola pencatatan Working Record Operator PT EX.</p>
@@ -457,14 +510,17 @@ $nama = htmlspecialchars(
 
         <div class="admin-badge">
             <div class="avatar">A</div>
+
             <div>
                 <div class="admin-name"><?= $nama ?></div>
                 <div class="admin-role">Administrator</div>
             </div>
         </div>
+
     </div>
 
     <section class="welcome">
+
         <span class="welcome-label">ADMINISTRATOR PANEL</span>
 
         <h2>Selamat datang, <?= $nama ?>!</h2>
@@ -474,9 +530,11 @@ $nama = htmlspecialchars(
             dashboard administrasi ini. Working Record dapat dibuka
             langsung dari tombol Buat / Lihat WR pada halaman Issue Target.
         </p>
+
     </section>
 
     <section>
+
         <div class="section-heading">
             <h2>Menu Pengelolaan</h2>
             <p>Pilih menu yang ingin kamu buka.</p>
@@ -485,6 +543,7 @@ $nama = htmlspecialchars(
         <div class="cards">
 
             <a class="card" href="users.php">
+
                 <div class="card-icon icon-red">&#9787;</div>
 
                 <h3>Data User</h3>
@@ -497,9 +556,11 @@ $nama = htmlspecialchars(
                 <span class="card-action">
                     Buka Data User &rarr;
                 </span>
+
             </a>
 
             <a class="card" href="issue.php">
+
                 <div class="card-icon icon-blue">&#9776;</div>
 
                 <h3>Issue Target</h3>
@@ -513,18 +574,18 @@ $nama = htmlspecialchars(
                 <span class="card-action">
                     Buka Issue Target &rarr;
                 </span>
+
             </a>
 
         </div>
+
     </section>
 
     <div class="footer">
-        &copy; <?= date('Y') ?> Working Record Operator PT EX
-        &mdash; Admin Dashboard
+        &copy; <?= date('Y') ?> Copyright © 2026 Debby Fransurya, S.Kom.
     </div>
 
 </main>
 
 </body>
 </html>
-```

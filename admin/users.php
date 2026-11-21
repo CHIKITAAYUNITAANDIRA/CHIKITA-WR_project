@@ -1,4 +1,4 @@
-```php
+
 <?php
 require '../session_check.php';
 require '../config/database.php';
@@ -306,9 +306,8 @@ $nama = htmlspecialchars($_SESSION['nama'] ?? 'Administrator', ENT_QUOTES, 'UTF-
     </main>
 
     <footer class="footer">
-        Sistem Pencatatan Working Record Operator PT EX
+        Copyright ©️ 2026 Debby Fransurya, S.Kom.
     </footer>
 
 </body>
 </html>
-```

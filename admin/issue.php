@@ -357,7 +357,7 @@ $nama = htmlspecialchars(
     </main>
 
     <footer class="footer">
-        Sistem Pencatatan Working Record Operator PT EX
+        Copyright ©️ 2026 Debby Fransurya, S.Kom.
     </footer>
 
 </body>
